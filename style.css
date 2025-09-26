@@ -4,17 +4,49 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #f0f0f0;
     margin: 0;
     text-align: center;
+    overflow: hidden; /* Nasconde le parti delle onde che vanno oltre lo schermo */
 }
 
+/* Contenitore principale per l'effetto acqua */
+.water-background {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to bottom, #87CEEB, #4682B4); /* Colore acqua, dal chiaro allo scuro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Stile per il contenitore dell'app sopra l'acqua */
 .container {
+    position: relative; /* Per posizionarlo sopra le onde */
+    z-index: 10; /* Assicura che sia sopra le onde */
     max-width: 500px;
     padding: 20px;
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.9); /* Sfondo leggermente trasparente */
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Effetto 'galleggiante' */
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Animazione per l'effetto 'galleggiante' */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+h1 {
+    color: #333;
+}
+
+p {
+    color: #555;
 }
 
 #wellbeingCanvas {
@@ -22,6 +54,7 @@ body {
     border-radius: 50%;
     border: 2px solid #ccc;
     background: radial-gradient(circle, #00A000, #FFFF00, #FF0000);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Un po' di ombra per dare profondità */
 }
 
 .result {
@@ -33,3 +66,53 @@ body {
     font-weight: bold;
     color: #008000;
 }
+
+/* Stile per le singole onde */
+.wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px; /* Altezza base dell'onda */
+    background: rgba(255, 255, 255, 0.4); /* Colore delle onde */
+    border-radius: 50% 50% 0 0; /* Forma curva */
+    transform: translateX(-50%);
+    animation: wave-animation 10s linear infinite;
+    z-index: 1;
+    opacity: 0.7;
+}
+
+/* Variazioni per creare più onde sovrapposte */
+.wave1 {
+    animation-delay: 0s;
+    height: 120px;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.wave2 {
+    animation-delay: 2.5s; /* Sposta l'inizio dell'animazione */
+    height: 110px;
+    background: rgba(255, 255, 255, 0.4);
+    opacity: 0.6;
+}
+
+.wave3 {
+    animation-delay: 5s;
+    height: 130px;
+    background: rgba(255, 255, 255, 0.6);
+    opacity: 0.8;
+}
+
+.wave4 {
+    animation-delay: 7.5s;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.3);
+    opacity: 0.5;
+}
+
+/* Animazione del movimento delle onde */
+@keyframes wave-animation {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
